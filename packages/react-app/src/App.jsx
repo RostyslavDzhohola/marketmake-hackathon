@@ -125,6 +125,9 @@ function App(props) {
           <Menu.Item key="/">
             <Link onClick={()=>{setRoute("/")}} to="/">Swap</Link>
           </Menu.Item>
+          <Menu.Item key="YourContract">
+            <Link onClick={()=>{setRoute("/YourContract")}} to="/YourContract">Lend Agregator</Link>
+          </Menu.Item>
           <Menu.Item key="/lend">
             <Link onClick={()=>{setRoute("/lend")}} to="/lend">Lend</Link>
           </Menu.Item>
@@ -145,6 +148,31 @@ function App(props) {
             tokenListURI={tokenListURI}
             />
           </Row>
+        </Route>
+        <Route exact path="/YourContract">
+          {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+            <Contract
+              name="YourContract"
+              signer={userProvider.getSigner()}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+            />
+
+            { /* Uncomment to display and interact with an external contract (DAI on mainnet):
+            <Contract
+              name="DAI"
+              customContract={mainnetDAIContract}
+              signer={userProvider.getSigner()}
+              provider={mainnetProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+            />
+            */ }
         </Route>
         <Route exact path="/lend">
           <Row justify="center">
