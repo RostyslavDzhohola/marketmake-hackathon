@@ -7,7 +7,7 @@
 ## quickstart
 
 ```bash
-git clone -b lender https://github.com/RostyslavDzhohola/marketmake-hackathon.git lender-scaffold
+git clone -b lenderAndContract https://github.com/RostyslavDzhohola/marketmake-hackathon.git lender-scaffold
 
 cd lender-scaffold
 ```
