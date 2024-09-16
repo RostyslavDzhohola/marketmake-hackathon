@@ -125,6 +125,12 @@ function App(props) {
           <Menu.Item key="/">
             <Link onClick={()=>{setRoute("/")}} to="/">Swap</Link>
           </Menu.Item>
+          <Menu.Item key="YourContract">
+            <Link onClick={()=>{setRoute("/YourContract")}} to="/YourContract">Lend Agregator</Link>
+          </Menu.Item>
+          <Menu.Item key="/lend">
+            <Link onClick={()=>{setRoute("/lend")}} to="/lend">Lend</Link>
+          </Menu.Item>
           <Menu.Item key="/hints">
             <Link onClick={()=>{setRoute("/hints")}} to="/hints">Hints</Link>
           </Menu.Item>
@@ -143,11 +149,36 @@ function App(props) {
             />
           </Row>
         </Route>
+        <Route exact path="/YourContract">
+          {/*
+                🎛 this scaffolding is full of commonly used components
+                this <Contract/> component will automatically parse your ABI
+                and give you a form to interact with it locally
+            */}
+            <Contract
+              name="YourContract"
+              signer={userProvider.getSigner()}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+            />
+
+            { /* Uncomment to display and interact with an external contract (DAI on mainnet):
+            <Contract
+              name="DAI"
+              customContract={mainnetDAIContract}
+              signer={userProvider.getSigner()}
+              provider={mainnetProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+            />
+            */ }
+        </Route>
         <Route exact path="/lend">
           <Row justify="center">
           <Lend
             selectedProvider={userProvider}
-            tokenListURI={tokenListURI}
+            ethPrice={price}
             />
           </Row>
         </Route>
@@ -157,7 +188,7 @@ function App(props) {
             <Paragraph>Click the <SettingOutlined/> on the Swapper widget to view more detailed settings (slippage tolerance, time limit) and other calculations.</Paragraph>
             {onLocalChain?<Paragraph>Add an <a href="https://alchemyapi.io/" target="_blank">Alchemy API URL</a> to the fork script at <Text code>/packages/hardhat/package.json</Text> to avoid <Text code>archive node</Text> errors</Paragraph>:null}
             <Input placeholder="Enter tokenlist URL" value={tokenListURI} onChange={(e) => {
-              console.log(e)
+              console.log(e.target.value)
               setTokenListURI(e.target.value) }}
               style={{width:400}}
               />
